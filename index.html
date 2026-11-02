@@ -3,52 +3,189 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CalmCode Labs</title>
+<title>CalmCode Labs – Simple, Useful Android Apps</title>
+<meta name="description" content="CalmCode Labs is an independent developer building lightweight, easy-to-use utility apps for Android.">
 <style>
   *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
   body{margin:0;font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:#f6f7fb;color:#1d2433;line-height:1.65}
-  .wrap{max-width:900px;margin:0 auto;padding:50px 20px}
-  header{text-align:center}
-  .logo{width:72px;height:72px;border-radius:18px;background:linear-gradient(135deg,#3b6cff,#7a4dff);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:28px}
-  h1{margin:16px 0 4px;font-size:32px}
-  .sub{color:#5b6475;margin:0}
-  .about{text-align:center;max-width:640px;margin:24px auto 0;color:#3a4252}
-  h2{text-align:center;margin-top:48px;font-size:22px}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:20px}
-  .card{background:#fff;border:1px solid #e5e8f0;border-radius:14px;padding:20px}
-  .card h3{margin:0 0 6px;font-size:16px}
-  .card p{margin:0;color:#5b6475;font-size:14px}
-  .center{text-align:center}
-  .btn{display:inline-block;margin-top:32px;background:#3b6cff;color:#fff;padding:12px 24px;border-radius:10px;text-decoration:none;font-weight:600}
-  .contact{margin-top:20px;color:#5b6475}
-  .contact a{color:#3b6cff;text-decoration:none}
-  footer{text-align:center;color:#8a92a3;font-size:13px;margin-top:50px}
+  a{color:#3b6cff;text-decoration:none}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 20px}
+  nav{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid #e5e8f0;z-index:10}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;color:#1d2433}
+  .mini{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,#3b6cff,#7a4dff);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:14px}
+  .links a{margin-left:20px;color:#3a4252;font-size:14px}
+  .links a:hover{color:#3b6cff}
+  .hero{text-align:center;padding:80px 0 60px}
+  .logo{width:80px;height:80px;border-radius:20px;background:linear-gradient(135deg,#3b6cff,#7a4dff);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:30px;box-shadow:0 10px 30px rgba(59,108,255,.3)}
+  h1{margin:18px 0 8px;font-size:40px}
+  .sub{color:#5b6475;margin:0;font-size:18px}
+  .lead{max-width:640px;margin:22px auto 0;color:#3a4252}
+  .btn{display:inline-block;margin-top:28px;background:#3b6cff;color:#fff;padding:12px 26px;border-radius:10px;font-weight:600}
+  .btn.ghost{background:#fff;color:#3b6cff;border:1px solid #cfd8ff;margin-left:10px}
+  section{padding:60px 0}
+  section.alt{background:#fff;border-top:1px solid #eef0f5;border-bottom:1px solid #eef0f5}
+  h2{text-align:center;font-size:28px;margin:0 0 8px}
+  .center-sub{text-align:center;color:#5b6475;max-width:620px;margin:0 auto 36px}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px}
+  .stat{background:#fff;border:1px solid #e5e8f0;border-radius:14px;padding:22px;text-align:center}
+  .stat b{display:block;font-size:28px;color:#3b6cff}
+  .stat span{color:#5b6475;font-size:14px}
+  .apps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+  .app{background:#f9faff;border:1px solid #e5e8f0;border-radius:16px;padding:24px;display:flex;flex-direction:column}
+  .icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:14px}
+  .app h3{margin:0 0 6px;font-size:17px}
+  .app p{margin:0 0 12px;color:#5b6475;font-size:14px}
+  .app ul{margin:0;padding-left:18px;color:#3a4252;font-size:14px}
+  .get{margin-top:auto;padding-top:16px;font-weight:600;font-size:14px}
+  .features{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+  .feature{background:#fff;border:1px solid #e5e8f0;border-radius:14px;padding:24px}
+  .feature .emoji{font-size:26px}
+  .feature h3{margin:10px 0 6px;font-size:17px}
+  .feature p{margin:0;color:#5b6475;font-size:14px}
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;counter-reset:s}
+  .step{position:relative;background:#f9faff;border:1px solid #e5e8f0;border-radius:14px;padding:24px 20px 20px}
+  .step:before{counter-increment:s;content:counter(s);position:absolute;top:-14px;left:20px;width:28px;height:28px;border-radius:50%;background:#3b6cff;color:#fff;font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center}
+  .step h3{margin:6px 0 6px;font-size:16px}
+  .step p{margin:0;color:#5b6475;font-size:14px}
+  .faq{max-width:760px;margin:0 auto}
+  details{background:#fff;border:1px solid #e5e8f0;border-radius:12px;padding:16px 20px;margin-bottom:12px}
+  summary{cursor:pointer;font-weight:600}
+  details p{margin:10px 0 0;color:#5b6475}
+  .contact{max-width:640px;margin:0 auto;text-align:center;background:linear-gradient(135deg,#3b6cff,#7a4dff);color:#fff;border-radius:20px;padding:40px 24px}
+  .contact h2{color:#fff}
+  .contact p{color:#e6e9ff}
+  .contact a.mail{display:inline-block;margin-top:14px;background:#fff;color:#3b6cff;padding:12px 24px;border-radius:10px;font-weight:600}
+  footer{text-align:center;color:#8a92a3;font-size:13px;padding:40px 0}
+  @media(max-width:600px){h1{font-size:30px}.links{display:none}.btn.ghost{margin-left:0;margin-top:12px}}
 </style>
 </head>
 <body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand"><span class="mini">CL</span>CalmCode Labs</div>
+    <div class="links">
+      <a href="#apps">Apps</a>
+      <a href="#why">Why Us</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
 <div class="wrap">
-  <header>
+  <div class="hero">
     <div class="logo">CL</div>
     <h1>CalmCode Labs</h1>
     <p class="sub">Simple, useful apps for Android</p>
-  </header>
-
-  <p class="about">CalmCode Labs is an independent app developer building lightweight, easy-to-use utility apps for Android. Our goal is to make everyday tasks faster and simpler with clean design and reliable performance.</p>
-
-  <h2>Our Apps</h2>
-  <div class="grid">
-    <div class="card"><h3>AI Translator: Voice &amp; Camera</h3><p>Translate text, voice and images between languages.</p></div>
-    <div class="card"><h3>Status Save App: Video Saver</h3><p>Save and manage photo and video statuses easily.</p></div>
-    <div class="card"><h3>Image &amp; Video Compressor</h3><p>Reduce photo and video size without losing quality.</p></div>
-    <div class="card"><h3>Bright Flashlight &amp; RGB Light</h3><p>Bright flashlight with screen and RGB light modes.</p></div>
+    <p class="lead">CalmCode Labs is an independent app developer building lightweight, easy-to-use utility apps for Android. Our goal is to make everyday tasks faster and simpler with clean design and reliable performance.</p>
+    <a class="btn" href="https://play.google.com/store/apps/developer?id=CalmCode+Labs">View on Google Play</a>
+    <a class="btn ghost" href="#apps">Explore Our Apps</a>
   </div>
 
-  <div class="center">
-    <a class="btn" href="https://play.google.com/store/apps/developer?id=CalmCode+Labs">View our apps on Google Play</a>
-    <p class="contact">Contact: <a href="mailto:muhammadashraf83j@gmail.com">muhammadashraf83j@gmail.com</a></p>
+  <div class="stats">
+    <div class="stat"><b>4+</b><span>Apps on Google Play</span></div>
+    <div class="stat"><b>100%</b><span>Focused on Android</span></div>
+    <div class="stat"><b>Free</b><span>To download and use</span></div>
+    <div class="stat"><b>24/7</b><span>Works offline where possible</span></div>
   </div>
-
-  <footer>&copy; 2026 CalmCode Labs. All rights reserved.</footer>
 </div>
+
+<section class="alt" id="apps">
+  <div class="wrap">
+    <h2>Our Apps</h2>
+    <p class="center-sub">Each app is designed to do one job well — fast, simple and easy to understand from the first tap.</p>
+    <div class="apps">
+      <div class="app">
+        <div class="icon" style="background:#e8eeff">🌐</div>
+        <h3>AI Translator: Voice &amp; Camera</h3>
+        <p>Translate between many languages in seconds.</p>
+        <ul><li>Voice translation</li><li>Camera &amp; image translation</li><li>Documents, phrases &amp; dictionary</li></ul>
+        <a class="get" href="https://play.google.com/store/apps/details?id=com.ai.all.language.translator">Get it on Google Play &rarr;</a>
+      </div>
+      <div class="app">
+        <div class="icon" style="background:#e3f8ec">⬇️</div>
+        <h3>Status Save App: Video Saver</h3>
+        <p>Keep the statuses you love on your phone.</p>
+        <ul><li>Save photos &amp; videos</li><li>Organized saved gallery</li><li>Quick share &amp; repost</li></ul>
+        <a class="get" href="https://play.google.com/store/apps/details?id=com.videostatus.image.statusapp.downloadvideostatus">Get it on Google Play &rarr;</a>
+      </div>
+      <div class="app">
+        <div class="icon" style="background:#e6f2ff">🗜️</div>
+        <h3>Image &amp; Video Compressor</h3>
+        <p>Free up storage and share files faster.</p>
+        <ul><li>Compress photos &amp; videos</li><li>Keep good quality</li><li>Batch compression</li></ul>
+        <a class="get" href="https://play.google.com/store/apps/details?id=com.smartcompress.imagevideo">Get it on Google Play &rarr;</a>
+      </div>
+      <div class="app">
+        <div class="icon" style="background:#fff3e0">🔦</div>
+        <h3>Bright Flashlight &amp; RGB Light</h3>
+        <p>A bright light whenever you need it.</p>
+        <ul><li>One-tap flashlight</li><li>Screen light mode</li><li>Colorful RGB light</li></ul>
+        <a class="get" href="https://play.google.com/store/apps/details?id=com.powerbeam.superbtight.sosflashlight">Get it on Google Play &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="why">
+  <div class="wrap">
+    <h2>Why Choose CalmCode Labs</h2>
+    <p class="center-sub">We build apps we would want to use ourselves.</p>
+    <div class="features">
+      <div class="feature"><div class="emoji">⚡</div><h3>Fast &amp; Lightweight</h3><p>Small app sizes and quick loading, so they run smoothly even on older phones.</p></div>
+      <div class="feature"><div class="emoji">🎨</div><h3>Clean, Simple Design</h3><p>Clear screens and easy controls — no confusing menus or extra steps.</p></div>
+      <div class="feature"><div class="emoji">🔒</div><h3>Respect for Your Data</h3><p>Your files stay on your device. We only ask for permissions a feature truly needs.</p></div>
+      <div class="feature"><div class="emoji">📴</div><h3>Works Offline</h3><p>Many features work without an internet connection, wherever you are.</p></div>
+      <div class="feature"><div class="emoji">🔄</div><h3>Regular Updates</h3><p>We keep improving our apps with new features, fixes and better performance.</p></div>
+      <div class="feature"><div class="emoji">💬</div><h3>We Listen</h3><p>User reviews and feedback directly shape what we build next.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <h2>How We Build</h2>
+    <p class="center-sub">A simple process focused on real everyday needs.</p>
+    <div class="steps">
+      <div class="step"><h3>Find a Need</h3><p>We look for everyday tasks that should be quicker and easier.</p></div>
+      <div class="step"><h3>Design Simply</h3><p>We design clean screens that anyone can understand instantly.</p></div>
+      <div class="step"><h3>Build &amp; Test</h3><p>We test on many devices to make sure the app is stable and fast.</p></div>
+      <div class="step"><h3>Improve</h3><p>We update regularly based on your reviews and suggestions.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <h2>Frequently Asked Questions</h2>
+    <p class="center-sub">Quick answers to common questions.</p>
+    <div class="faq">
+      <details><summary>Are CalmCode Labs apps free?</summary><p>Yes, our apps are free to download. Some apps show ads to support development, and some may offer optional premium features.</p></details>
+      <details><summary>Where can I download your apps?</summary><p>All our apps are available on the Google Play Store under the developer name CalmCode Labs.</p></details>
+      <details><summary>Do your apps need an internet connection?</summary><p>Many features work offline. Some features, such as online translation, need an internet connection.</p></details>
+      <details><summary>Why does an app ask for permissions?</summary><p>Permissions are only used for the feature you are using — for example, the camera for flashlight or image translation, or storage for saving files.</p></details>
+      <details><summary>How can I report a problem or suggest a feature?</summary><p>Email us at the address below or leave a review on Google Play. We read every message.</p></details>
+    </div>
+  </div>
+</section>
+
+<section id="contact" style="padding-top:20px">
+  <div class="wrap">
+    <div class="contact">
+      <h2>Get in Touch</h2>
+      <p>Have a question, found a bug, or have an idea for a new feature? We would love to hear from you.</p>
+      <a class="mail" href="mailto:muhammadashraf83j@gmail.com">muhammadashraf83j@gmail.com</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  &copy; 2026 CalmCode Labs. All rights reserved.<br>
+  <a href="https://play.google.com/store/apps/developer?id=CalmCode+Labs">Google Play</a>
+</footer>
+
 </body>
 </html>
